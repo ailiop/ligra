@@ -23,9 +23,14 @@ MEM = -DLOWMEM
 endif
 
 #compilers
-ifdef CILK
+ifdef OPENCILK
+PCC = $(OPENCILK_DIR)/bin/clang++
+PCFLAGS = -std=c++14 -fopencilk -O3 -DOPENCILK $(INTT) $(INTE) $(CODE) $(PD) $(MEM)
+PLFLAGS = -fopencilk
+
+else ifdef CILKPLUS
 PCC = g++
-PCFLAGS = -std=c++14 -fcilkplus -lcilkrts -O3 -DCILK $(INTT) $(INTE) $(CODE) $(PD) $(MEM)
+PCFLAGS = -std=c++14 -fcilkplus -lcilkrts -O3 -DCILKP $(INTT) $(INTE) $(CODE) $(PD) $(MEM)
 PLFLAGS = -fcilkplus -lcilkrts
 
 else ifdef MKLROOT

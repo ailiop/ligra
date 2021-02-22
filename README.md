@@ -21,14 +21,20 @@ Compilers
 * g++ &gt;= 5.3.0 with support for Cilk Plus
 * g++ &gt;= 5.3.0 with OpenMP
 * Intel icpc compiler
+* OpenCilk clang++ compiler
 
 To compile with g++ using Cilk Plus, define the environment variable
-CILK. To compile with icpc, define the environment variable MKLROOT
-and make sure CILK is not defined.  To compile with OpenMP, define the
-environment variable OPENMP and make sure CILK and MKLROOT are not
-defined.  Using Cilk Plus seems to give the best parallel performance in
-our experience.  To compile with g++ with no parallel support, make
-sure CILK, MKLROOT and OPENMP are not defined.
+CILKPLUS. To compile with OpenCilk, define the environment variable
+OPENCILK and make sure CILKPLUS is not defined. The path to the
+OpenCilk clang++ compiler is assumed to be $OPENCILK_DIR/bin/clang++;
+to use OpenCilk, either define OPENCILK_DIR accordingly or set the PCC
+environment to point to OpenCilk clang++. To compile with icpc, define
+the environment variable MKLROOT and make sure CILKPLUS and OPENCILK
+are not defined.  To compile with OpenMP, define the environment
+variable OPENMP and make sure CILKPLUS, OPENCILK and MKLROOT are not
+defined.  Using Cilk Plus seems to give the best parallel performance
+in our experience.  To compile with g++ with no parallel support, make
+sure CILKPLUS, OPENCILK, MKLROOT and OPENMP are not defined.
 
 Note: OpenMP support in Ligra has not been thoroughly tested. If you
 experience any errors, please send an email to [Julian
@@ -466,7 +472,7 @@ independent set), **KCore.C** (K-core decomposition), **Triangle.C**
 
 
 Eccentricity Estimation 
--------- 
+--------
 Code for eccentricity estimation is available in the
 apps/eccentricity/ directory: **kBFS-Ecc.C** (2 passes of multiple
 BFS's), **kBFS-1Phase-Ecc.C** (1 pass of multiple BFS's), **FM-Ecc.C**
@@ -502,8 +508,8 @@ components), **HyperSSSP.C** (shortest paths), **HyperPageRank.C**
 (work-inefficient K-core decomposition), and
 **HyperKCore-Efficient.C** (work-efficient K-core decomposition).
 
-Resources  
--------- 
+Resources
+--------
 Julian Shun and Guy E. Blelloch. [*Ligra: A
 Lightweight Graph Processing Framework for Shared
 Memory*](https://people.csail.mit.edu/jshun/ligra.pdf). Proceedings of the

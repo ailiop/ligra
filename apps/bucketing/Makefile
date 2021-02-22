@@ -19,9 +19,14 @@ CODE = -DBYTERLE
 endif
 
 #compilers
-ifdef CILK
+ifdef OPENCILK
+PCC = $(OPENCILK_DIR)/bin/clang++
+PCFLAGS = -std=c++14 -fopencilk -O3 -DOPENCILK $(INTT) $(INTE) $(CODE) $(PD)
+PLFLAGS = -fopencilk
+
+else ifdef CILKPLUS
 PCC = g++
-PCFLAGS = -std=c++14 -fcilkplus -lcilkrts -O3 -DCILK $(INTT) $(INTE) $(CODE) $(PD) $(FLAGS)
+PCFLAGS = -std=c++14 -fcilkplus -lcilkrts -O3 -DCILKP $(INTT) $(INTE) $(CODE) $(PD) $(FLAGS)
 PLFLAGS = -fcilkplus -lcilkrts
 
 else ifdef MKLROOT

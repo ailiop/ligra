@@ -7,9 +7,14 @@ INTE = -DEDGELONG
 endif
 
 #compilers
-ifdef CILK
+ifdef OPENCILK
+PCC = $(OPENCILK_DIR)/bin/clang++
+PCFLAGS = -std=c++14 -fopencilk -O3 -DOPENCILK $(INTT) $(INTE)
+PLFLAGS = -fopencilk
+
+else ifdef CILKPLUS
 PCC = g++
-PCFLAGS = -std=c++14 -fcilkplus -lcilkrts -O3 -DCILK $(INTT) $(INTE)
+PCFLAGS = -std=c++14 -fcilkplus -lcilkrts -O3 -DCILKP $(INTT) $(INTE)
 PLFLAGS = -fcilkplus -lcilkrts
 
 else ifdef MKLROOT
